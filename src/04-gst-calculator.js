@@ -38,6 +38,82 @@
  *   calculateGST(500, "essential")
  *   // => { baseAmount: 500, gstRate: 0, gstAmount: 0, totalAmount: 500 }
  */
+
+
+
+// export function calculateGST(amount, category) {
+//   if(typeof amount !== "number" || 
+//     !Number.isFinite(amount) || 
+//     typeof category !== "string" ||
+//     amount <= 0
+// )return null;
+
+// const baseAmount = amount;
+// const itemCategory = category.toLowerCase();
+// let rate;
+
+// if(itemCategory === "essential"){
+//   rate = 0
+// }
+// else if(itemCategory === "food"){
+//   rate =5;
+// }
+// else if(itemCategory === "standard"){
+//   rate =12;
+// }
+// else if(itemCategory === "electronics"){
+//   rate =18;
+// }
+// else if(itemCategory === "luxury"){
+//   rate =28;
+// }
+// else{
+//   return null;
+// }
+
+// const gstAmount = baseAmount * rate/100;
+// const totalAmount = baseAmount + gstAmount;
+
+// return{
+//   baseAmount : baseAmount,
+//   gstRate : rate,
+//   gstAmount : parseFloat(gstAmount.toFixed(2)),
+//   totalAmount : parseFloat(totalAmount.toFixed(2)),
+// }
+// }
+
 export function calculateGST(amount, category) {
-  // Your code here
+
+  if (
+    typeof amount !== "number" ||
+    !Number.isFinite(amount) ||
+    amount <= 0 ||
+    typeof category !== "string"
+  ) {
+    return null;
+  }
+
+  const gstRates = {
+    essential: 0,
+    food: 5,
+    standard: 12,
+    electronics: 18,
+    luxury: 28
+  };
+
+  const itemCategory = category.toLowerCase();
+
+  const rate = gstRates[itemCategory];
+
+  if (rate === undefined) return null;
+
+  const gstAmount = amount * rate / 100;
+  const totalAmount = amount + gstAmount;
+
+  return {
+    baseAmount: amount,
+    gstRate: rate,
+    gstAmount: parseFloat(gstAmount.toFixed(2)),
+    totalAmount: parseFloat(totalAmount.toFixed(2))
+  };
 }
