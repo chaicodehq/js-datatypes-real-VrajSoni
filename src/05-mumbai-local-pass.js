@@ -41,6 +41,66 @@
  *   generateLocalPass(null)
  *   // => "INVALID PASS"
  */
+// export function generateLocalPass(passenger) {
+//   if(typeof passenger !== "object" ||
+//     passenger === null ||
+//     passenger.name === "" ||
+//     passenger.from === "" ||
+//     passenger.to === "" ||
+//     passenger.classType === "" ||
+//     typeof passenger.name !== "string" ||
+//     typeof passenger.from !== "string" ||
+//     typeof passenger.to !== "string" ||
+//     typeof passenger.classType !== "string") return 'INVALID PASS';
+
+//     const formatedClassType = passenger.classType.toLowerCase();
+//     if(formatedClassType !== "first" && formatedClassType !== "second" ) return 'INVALID PASS';
+
+//     const passID = formatedClassType.charAt(0).toUppperCase() + passenger.from.slice(0,3).toUpperCase() + passenger.to.slice(0,3).toUpperCase()
+//     const newFrom = passenger.from.charAt(0).toUpperCase() + passenger.from.slice(1).toLowerCase()
+//     const newTo = passenger.to.charAt(0).toUpperCase() + passenger.to.slice(1).toLowerCase()
+
+//     return `MUMBAI LOCAL PASS\n---\nName: ${passenger.name.toUpperCase()} \nFrom: ${newFrom}\nTo: ${newTo}\nClass: ${formatedClassType.toUpperCase()}\nPass ID: ${passID}`
+// }
+
 export function generateLocalPass(passenger) {
-  // Your code here
+
+  if(
+  typeof passenger !== "object" ||
+  passenger === null ||
+  typeof passenger.name !== "string" ||
+  typeof passenger.from !== "string" ||
+  typeof passenger.to !== "string" ||
+  typeof passenger.classType !== "string" ||
+  passenger.name === "" ||
+  passenger.from === "" ||
+  passenger.to === "" ||
+  passenger.classType === ""
+  ) return "INVALID PASS";
+
+  const formattedClassType = passenger.classType.toLowerCase();
+
+  if(formattedClassType !== "first" && formattedClassType !== "second")
+  return "INVALID PASS";
+
+  const passID =
+  formattedClassType.charAt(0).toUpperCase() +
+  passenger.from.slice(0,3).toUpperCase() +
+  passenger.to.slice(0,3).toUpperCase();
+
+  const newFrom =
+  passenger.from.charAt(0).toUpperCase() +
+  passenger.from.slice(1).toLowerCase();
+
+  const newTo =
+  passenger.to.charAt(0).toUpperCase() +
+  passenger.to.slice(1).toLowerCase();
+
+  return `MUMBAI LOCAL PASS
+---
+Name: ${passenger.name.toUpperCase()}
+From: ${newFrom}
+To: ${newTo}
+Class: ${formattedClassType.toUpperCase()}
+Pass ID: ${passID}`;
 }
